@@ -1,0 +1,315 @@
+<div class="wcontainer">
+    <div class="whatsapp">
+        <div class="whatsapp_main">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="whatsapp_main_sidemenu">
+
+                        <div class="whatsapp_main_sidemenu_middle">
+                            <i class="fa fa-search"></i>
+                            <input style="width:300px" id="searchBox" placeholder="Search" name="search">
+
+                            <button data-toggle="modal" data-target="#addContactModal" style="display: inline;margin-left:5px;border-radius :20px;">+</button>
+                        </div>
+                        <div class="whatapp_main_sidemenu_bottom scroll">
+                            <div class="whatapp_main_sidemenu_bottom_chat">
+                                <ul id="myList" role="button" style="cursor : pointer" class="list-group">
+                                    <li *ngFor="let one of contactList" class="list-group-item contactList" (click)="getUserDetailsById(one.id)">
+                                        <div class="row">
+                                            <div class="col-3 p-0">
+                                                <img style="border-radius : 50px" [src]="one.avatar" class="avatar" alt="">
+                                            </div>
+                                            <div class="col-9">
+                                                <h3 style="text-align:left" class="discription">
+                                                    {{one.displayName}}
+                                                </h3>
+                                                <p style="font-size: 14px;text-align:left">{{one.countryCode}} {{one.phoneNumber}}
+                                                    <!-- <span><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 18 18" width="18" height="18">
+                                                        <path fill="#4FC3F7"
+                                                            d="M17.394 5.035l-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-.427-.388a.381.381 0 0 0-.578.038l-.451.576a.497.497 0 0 0 .043.645l1.575 1.51a.38.38 0 0 0 .577-.039l7.483-9.602a.436.436 0 0 0-.076-.609zm-4.892 0l-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-2.614-2.556a.435.435 0 0 0-.614.007l-.505.516a.435.435 0 0 0 .007.614l3.887 3.8a.38.38 0 0 0 .577-.039l7.483-9.602a.435.435 0 0 0-.075-.609z">
+                                                        </path>
+                                                    </svg></span> Message -->
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-xs-0 pr-0 pl-0 m-0">
+
+                    <div class="whatsapp_main_body p-5">
+
+                        <div *ngIf="!userData.avatar" class="whatsapp_main_body_image">
+                            <img src="https://cdn2.iconfinder.com/data/icons/flat-style-svg-icons-part-1/512/address_book-512.png" alt="">
+                        </div>
+                        <div *ngIf="userData.avatar" class="container">
+                            <div class=".col-xs-4 .col-md-offset-2">
+                                <div class="panel panel-default panel-info Profile">
+
+
+                                    <div class="panel-body">
+                                        <div>
+                                            <div align="center" class="centered">
+                                                <div class="hovereffect mb-5 row">
+                                                    <img *ngIf="!userData.avatar" style="height:250px;width:250px;border-radius :20px;" src="https://web.whatsapp.com/img/c98cc75f2aa905314d74375a975d2cf2.jpg">
+                                                    <img *ngIf="userData.avatar" style="height:250px;width:250px;border-radius :20px;" [src]="userData.avatar">
+                                                    <div class="overlay">
+
+                                                        <a class="info" data-toggle="modal" data-target="#addProfileModal">Edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                            <form>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Display Name</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="displayName" placeholder="Display name" [(ngModel)]="userData.displayName">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">First Name</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="firstName" placeholder="First Name" [(ngModel)]="userData.fname">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Last Name</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="userData.lname">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Email</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="email" placeholder="Email" [(ngModel)]="userData.email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Phone number</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="department" placeholder="Phone number" [(ngModel)]="userData.phoneNumber">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Birth Date</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="date" name="title" placeholder="Birth date" [(ngModel)]="userData.birthday">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Address</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="startDate" placeholder="Address" [(ngModel)]="userData.address">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">City</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="location" placeholder="City" [(ngModel)]="userData.city">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">State</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="phone" placeholder="State" [(ngModel)]="userData.state">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Country</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="phone" placeholder="Country" [(ngModel)]="userData.country">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Zip</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="phone" placeholder="Zip code" [(ngModel)]="userData.zip">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">Country code</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-control" type="text" name="phone" placeholder="Country code (+91)" [(ngModel)]="userData.countryCode">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button class="btn btn-primary" (click)="updateMe(userData)">Update</button>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <!-- end form-horizontal -->
+                                    </div>
+                                    <!-- end panel-body -->
+
+                                </div>
+                                <!-- end panel -->
+
+
+                            </div>
+                            <!-- end size -->
+                        </div>
+                        <!-- end container-fluid -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-labelledby="addContactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addContactModalLabel">Add new contact</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Profile Url</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="displayName" placeholder="Profile Url" [(ngModel)]="newUserData.avatar">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Display Name*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="displayName" placeholder="Display name" [(ngModel)]="newUserData.displayName">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">First Name*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="firstName" placeholder="First Name" [(ngModel)]="newUserData.fname">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Last Name*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="newUserData.lname">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Email*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="email" placeholder="Email" [(ngModel)]="newUserData.email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Phone number*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="department" placeholder="Phone number" [(ngModel)]="newUserData.phoneNumber">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Birth Date</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="date" name="title" placeholder="Birth date" [(ngModel)]="newUserData.birthday">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Address</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="startDate" placeholder="Address" [(ngModel)]="newUserData.address">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">City</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="location" placeholder="City" [(ngModel)]="newUserData.city">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">State</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="phone" placeholder="State" [(ngModel)]="newUserData.state">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Country</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="phone" placeholder="Country" [(ngModel)]="newUserData.country">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Zip</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="phone" placeholder="Zip code" [(ngModel)]="newUserData.zip">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Country code</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="phone" placeholder="Country code (+91)" [(ngModel)]="newUserData.countryCode">
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addContact()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addProfileModal" tabindex="-1" role="dialog" aria-labelledby="addContactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addContactModalLabel">Add profile url</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <label class="col-sm-4 control-label">Profile Url</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="displayName" placeholder="Profile Url" [(ngModel)]="userData.avatar">
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
